@@ -1,25 +1,25 @@
-@endpoint = http://localhost:4000/api/v1/cars
+@endpoint = http://localhost:3000/api/v1/cars
 
 ###
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ "test" : "post test" }
+{ "make": "Toyota", "model": "Corolla" }
 
 ###
 GET {{endpoint}} HTTP/1.1
 content-type: application/json
 
 ###
-GET {{endpoint}}/sillycarID HTTP/1.1
+GET {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
 content-type: application/json
 
 ###
-DELETE {{endpoint}}/sillycarID HTTP/1.1
+PUT {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
 content-type: application/json
+
+{ "model": "Yaris" }
 
 ###
-PUT {{endpoint}}/sillycarID HTTP/1.1
+DELETE {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
 content-type: application/json
-
-{ "test" : "put test" }
