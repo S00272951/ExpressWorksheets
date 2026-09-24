@@ -1,25 +1,41 @@
 @endpoint = http://localhost:3000/api/v1/cars
 
 ###
+# @name postACar
+POST {{endpoint}} HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{ "make": "Ford", "model": "Focus" }
+
+###
+@newCar = {{postACar.response.body._id}}
+
+###
+# POST 
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
-{ "make": "Toyota", "model": "Corolla" }
+{ "make": "Ford", "model": "Focus" }
 
 ###
 GET {{endpoint}} HTTP/1.1
 content-type: application/json
 
 ###
-GET {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
+GET {{endpoint}}/{{newCar}} HTTP/1.1
 content-type: application/json
 
 ###
-PUT {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
+PUT {{endpoint}}/{{newCar}} HTTP/1.1
 content-type: application/json
 
-{ "model": "Yaris" }
+{ "model": "Fiesta" }
 
 ###
-DELETE {{endpoint}}/6ab57c59eb148622a2c35dc1 HTTP/1.1
+DELETE {{endpoint}}/{{newCar}} HTTP/1.1
+content-type: application/json
+
+###
+DELETE {{endpoint}}/123 HTTP/1.1
 content-type: application/json

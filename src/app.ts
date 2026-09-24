@@ -1,3 +1,4 @@
+import { logger } from './middleware/logger.middleware';
 import carRoutes from './routes/cars';
 import express, { Application, Request, Response } from "express";
 import { env } from "./config/env";
@@ -9,10 +10,7 @@ const app: Application = express();
 
 app.use(express.json());
 
-app.use((req, _res, next) => {
-    console.log(`${req.method} ${req.originalUrl}`);
-    next();
-});
+app.use(logger);
 
 app.use('/api/v1/cars', carRoutes);
 
