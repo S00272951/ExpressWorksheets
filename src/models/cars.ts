@@ -22,6 +22,7 @@ import { z } from 'zod';
  *           example: 2010
  */
 
+
 export const createCarZSchema = z.object({
   make: z.string().min(1),
   model: z.string().min(1),
