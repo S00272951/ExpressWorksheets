@@ -1,3 +1,5 @@
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './config/swagger';
 import { logger } from './middleware/logger.middleware';
 import carRoutes from './routes/cars';
 import express, { Application, Request, Response } from "express";
@@ -7,6 +9,8 @@ import { connectDB } from "./config/database";
 const port = env.port;
 
 const app: Application = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.json());
 
