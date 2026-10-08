@@ -12,4 +12,9 @@ export const connectDB = async (): Promise<void> => {
     console.error(`Error connecting to MongoDB: ${(error as Error).message}`);
     process.exit(1);
   }
+
+  
+}
+export const disconnectDB = async (): Promise<void> => {
+  await mongoose.disconnect();
 };
