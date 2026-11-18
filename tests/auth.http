@@ -19,3 +19,31 @@ content-type: application/json
     "email": "not-an-email",
     "password": "123"
 }
+
+###
+# @name login
+POST {{endpoint}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "horuiaf@example.com",
+    "password": "difficult password"
+}
+
+### Login with wrong password (should be 401)
+POST {{endpoint}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "horuiaf@example.com",
+    "password": "wrong password"
+}
+
+### Login with a user that doesn't exist (should be 401)
+POST {{endpoint}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "nobody@example.com",
+    "password": "difficult password"
+}
