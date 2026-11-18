@@ -2,6 +2,7 @@ import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import { logger } from './middleware/logger.middleware';
+import { errorHandler } from './middleware/error.middleware';
 import carRoutes from './routes/cars';
 import express, { Application, Request, Response } from "express";
 
@@ -28,3 +29,6 @@ app.get('/bananas', async (_req: Request, res: Response) => {
         message: "this is bananas",
     });
 });
+
+// must be last
+app.use(errorHandler);
