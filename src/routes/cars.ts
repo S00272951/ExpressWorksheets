@@ -2,7 +2,7 @@ import { validate } from '../middleware/validate.middleware';
 import { createCarZSchema, updateCarZSchema, carParamsSchema } from '../models/cars';
 import { Router } from 'express';
 import { CarController } from '../controllers/cars';
-import { authenticateKey } from '../middleware/auth.middleware';
+import { authenticateKey, authenticateJWT } from '../middleware/auth.middleware';
 import { logger } from '../middleware/logger.middleware';
 
 const router = Router();
@@ -13,6 +13,6 @@ router.post('/', authenticateKey, logger, validate(createCarZSchema), carControl
 router.get('/', carController.getCars);
 router.get('/:id', validate(carParamsSchema), carController.getCarById);
 router.put('/:id', validate(updateCarZSchema), carController.updateCar);
-router.delete('/:id', validate(carParamsSchema), carController.deleteCar);
+router.delete('/:id', authenticateJWT, validate(carParamsSchema), carController.deleteCar);
 
 export default router;

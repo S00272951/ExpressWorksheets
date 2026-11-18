@@ -57,3 +57,17 @@ Authorization: Bearer {{accessToken}}
 
 ### Who am I (no token, should be 401)
 GET {{endpoint}}/auth/me HTTP/1.1
+
+### Delete a car without a token (should be 401)
+DELETE {{endpoint}}/cars/6ab57d2deb148622a2c35dc2 HTTP/1.1
+content-type: application/json
+
+### Delete with a token but a bad id (should be 400)
+DELETE {{endpoint}}/cars/123 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+### Delete a car with a token (should be 200)
+DELETE {{endpoint}}/cars/6ab57d2deb148622a2c35dc2 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
