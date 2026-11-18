@@ -36,14 +36,18 @@ import { z } from 'zod';
  */
 
 export const registerZSchema = z.object({
-  name: z.string().min(1),
-  email: z.email().toLowerCase(),
-  password: z.string().min(6).max(64),
+  body: z.object({
+    name: z.string().min(1),
+    email: z.email().toLowerCase(),
+    password: z.string().min(6).max(64),
+  }),
 });
 
 export const loginZSchema = z.object({
-  email: z.email().toLowerCase(),
-  password: z.string().min(1).max(64),
+  body: z.object({
+    email: z.email().toLowerCase(),
+    password: z.string().min(1).max(64),
+  }),
 });
 
 const userSchema = new Schema<IUser>(
