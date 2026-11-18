@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import { CarService } from '../services/cars';
 
 const carService = new CarService();
@@ -20,12 +19,8 @@ export class CarController {
    *         description: Internal server error
    */
   getCars = async (_req: Request, res: Response): Promise<void> => {
-    try {
-      const cars = await carService.getAllCars();
-      res.status(200).json(cars);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching cars', error });
-    }
+    const cars = await carService.getAllCars();
+    res.status(200).json(cars);
   };
 
   /**
@@ -50,17 +45,9 @@ export class CarController {
    *         description: Internal server error
    */
   getCarById = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-      const car = await carService.getCarById(id);
-      if (!car) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
-      res.status(200).json(car);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching car', error });
-    }
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const car = await carService.getCarById(id);
+    res.status(200).json(car);
   };
 
   /**
@@ -85,26 +72,14 @@ export class CarController {
    *         description: Internal server error
    */
   createCar = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const newCar = await carService.createCar(req.body);
-      res.status(201).json(newCar);
-    } catch (error) {
-      res.status(500).json({ message: 'Error inserting into MongoDB', error });
-    }
+    const newCar = await carService.createCar(req.body);
+    res.status(201).json(newCar);
   };
 
   updateCar = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-      const updatedCar = await carService.updateCar(id, req.body);
-      if (!updatedCar) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
-      res.status(200).json(updatedCar);
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating car', error });
-    }
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const updatedCar = await carService.updateCar(id, req.body);
+    res.status(200).json(updatedCar);
   };
 
   /**
@@ -131,23 +106,8 @@ export class CarController {
    *         description: Internal server error
    */
   deleteCar = async (req: Request, res: Response): Promise<void> => {
-    try {
-      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-
-      if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(400).json({ message: 'Invalid car id' });
-        return;
-      }
-
-      const deletedCar = await carService.deleteCar(id);
-      if (!deletedCar) {
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
-
-      res.status(200).json({ message: 'Car deleted', car: deletedCar });
-    } catch (error) {
-      res.status(500).json({ message: 'Error deleting car', error });
-    }
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const deletedCar = await carService.deleteCar(id);
+    res.status(200).json({ message: 'Car deleted', car: deletedCar });
   };
 }
