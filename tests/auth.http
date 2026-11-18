@@ -1,0 +1,21 @@
+@endpoint = http://localhost:3000/api/v1
+
+### Register a user
+POST {{endpoint}}/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Horuiaf",
+    "email": "horuiaf@example.com",
+    "password": "difficult password"
+}
+
+### Register with bad data (should be 400)
+POST {{endpoint}}/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "name": "",
+    "email": "not-an-email",
+    "password": "123"
+}
