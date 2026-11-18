@@ -47,3 +47,13 @@ content-type: application/json
     "email": "nobody@example.com",
     "password": "difficult password"
 }
+
+###
+@accessToken = {{login.response.body.token}}
+
+### Who am I (with token)
+GET {{endpoint}}/auth/me HTTP/1.1
+Authorization: Bearer {{accessToken}}
+
+### Who am I (no token, should be 401)
+GET {{endpoint}}/auth/me HTTP/1.1
